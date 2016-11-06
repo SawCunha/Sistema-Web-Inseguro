@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <title>Login</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/css/estilo.css">
+	</head>
+	<body>
+		<header>
+			<h1><strong>Meu</strong> site</h1>
+			<a href="/cadastro">Cadastro</a>
+		</header>
+		<section>
+			{% if e %}
+				Não foi possível autenticar com <strong>{{ e }}</strong>
+			{% endif %}
+
+			<i class="material-icons">lock</i>
+
+			<h2>Login</h2>
+			<form method="post" action="/autenticar">
+				<label>
+					E-mail
+					<input type="email" name="email" required>
+				</label>
+				<label>
+					Senha
+					<input type="password" name="senha" required>
+				</label>
+				<input type="submit" value="Enviar">
+			</form>
+		</section>
+	</body>
+</html>

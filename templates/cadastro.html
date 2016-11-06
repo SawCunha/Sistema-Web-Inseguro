@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <title>Cadastro</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/css/estilo.css">
+	</head>
+	<body>
+		<header>
+			<h1><strong>Meu</strong> site</h1>
+			<a href="/login">Login</a>
+		</header>
+		<section>
+			<i class="material-icons">account_box</i>
+
+			<h2>Cadastro</h2>
+			<form method="post" action="/cadastrar">
+				<label>
+					<span>E-mail</span>
+					<input type="email" name="email" required>
+				</label>
+				<label>
+					<span>Senha</span>
+					<input type="password" name="senha" required title="Você deve informar a senha.">
+				</label>
+				<label>
+					<span>Repita a senha</span>
+					<input type="password" name="senha2" required title="Você deve informar a senha.">
+				</label>
+
+				<div class="g-recaptcha" data-sitekey="6LeJFQsUAAAAAGvSk-rw5k_uepb7MwTPy4s0bhax"></div>
+				<input type="submit" value="Enviar">
+			</form>
+		</section>
+
+		<script src='https://www.google.com/recaptcha/api.js'></script>
+	</body>
+</html>

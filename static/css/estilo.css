@@ -1,0 +1,92 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+}
+
+body {
+	padding: 15px 20%;
+	background: linear-gradient(to top right, #489f9c, #4196c3) fixed;
+	color: #fff;
+}
+
+h1{
+	font-weight: 400;
+	float: left;
+}
+
+h2{
+	margin-bottom: 20px;
+}
+
+a{
+	float: right;
+	width: 80px;
+	text-align: center;
+	color: #fff;
+	padding: 10px;
+	border: solid 2px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-size: 14px;
+	letter-spacing: 1px;
+}
+
+section{
+	clear: both;
+	text-align: center;
+}
+
+i.material-icons{
+	font-size: 15vw;
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+}
+
+label{
+	display: block;
+	margin-bottom: 15px;
+}
+
+label span{
+	display: inline-block;
+	width: 140px;
+	text-align: left;
+}
+
+input{
+	padding: 5px;
+	border: solid 2px #fff;
+	background-color: transparent;
+	border-radius: 5px;
+	color: #fff;
+	margin-right: 10px;
+}
+
+input[type=submit]{
+	background-color: #fff;
+	color: #459baf;
+	font-weight: 700;
+	padding: 5px 15px;
+	cursor: pointer;
+}
+
+@media (max-width: 600px){
+	h1{
+		float: none;
+		width: 100%;
+		text-align: center;
+	}
+
+	a{
+		float: none;
+		margin: 20px auto 40px;
+		text-align: center;
+		display: block;
+	}
+
+	label span{
+		text-align: center;
+	}
+}
