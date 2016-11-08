@@ -79,15 +79,17 @@ def static_file(path):
 
 @app.route('/', methods=['GET'])
 def home():
+    session['erro'] = ''
     # Verifica se o usuário está autenticado
     if 'email' in session:
         return env.get_template('index.html').render()
 
     else:
-        return env.get_template('login.html').render()
+        return env.get_template('login.html').render(captcha="visibility: visible;")
 
 @app.route('/cadastro', methods=['GET'])
 def cadastro():
+    session['erro'] = ''
     if 'email' in session:
         return env.get_template('index.html').render()
 
@@ -101,7 +103,7 @@ def login():
     
     email = session['erro']
     session['erro'] = ''
-    return env.get_template('login.html').render(e=email)
+    return env.get_template('login.html').render(e=email,captcha="visibility: visible;")
 
 
 @app.route('/sair', methods=['GET'])
@@ -116,6 +118,14 @@ def sair():
 def autenticar():
     email = request.form.get('email')
     senha = request.form.get('senha')
+
+    recaptcha = request.form['g-recaptcha-response']
+    
+    if not recaptcha:
+        return redirect('/login')
+
+    if not valida_recaptcha(recaptcha):
+        return redirect('/login')    
 
     if email and senha:
         sc = criptografa(senha)

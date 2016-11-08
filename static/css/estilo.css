@@ -49,9 +49,14 @@ label{
 	margin-bottom: 15px;
 }
 
+div {
+	display: inline-block;
+	text-align: left;
+}
+
 label span{
 	display: inline-block;
-	width: 140px;
+	width: 160px;
 	text-align: left;
 }
 
