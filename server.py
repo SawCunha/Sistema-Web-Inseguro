@@ -219,8 +219,7 @@ def cadastrar():
 @app.route('/validar/<acesso>', methods=['GET'])
 def validar_cadastro(acesso):
     sqlite_atualiza_usuario(acesso)
-    print acesso
-    return env.get_template('/login.html').render(captcha="visibility: visible;")
+    return env.get_template('/autorizado.html').render()
 
 #Verifica se o recaptcha é válido.
 def valida_recaptcha(recaptcha):
