@@ -36,8 +36,10 @@ TEMPLATE_TEXTO = """
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(__name__)
-mail=Mail(app)
 
+mail=Mail(app)
+#Configura o Servido SMTP o qual será utilizado para enviar os email
+#Cliente e a senha. E se utilizara SSL para segurança.
 app.config.update(
 	DEBUG=True,
 	#EMAIL SETTINGS
@@ -113,7 +115,6 @@ def envia_email(assunto,tos,body):
 
 @app.route('/', methods=['GET'])
 def home():
-    #envia_email("Teste de Função",['samuelgonalves00@gmail.com','wdmeida@gmail.com'],'Olá, se chegou essa msg... so responder... kkkkkkkkkkkkkk ')
     session['erro'] = ''
     session['num_tentativas'] = '0'
     
@@ -207,10 +208,14 @@ def cadastrar():
         sc = criptografa(senha)
         # Verifica se o usuário não existe
         if not sqlite_consulta_email(email):
+            #Cria a chave de acesso.
             acesso = chave_acesso(email,senha,recaptcha)
             sqlite_cadastra_usuario(email, sc,acesso)
+            #Cria a msg padrão contendo a url de acesso, para liberar o login do usuario.
             MSG = TEMPLATE_TEXTO.format(acesso)
+            #Envia o email para o usuario.
             envia_email("Confirmação de Cadastro",[email],MSG)
+
             return env.get_template('cadastrado.html').render()
 
     return redirect('/cadastro')
@@ -218,6 +223,7 @@ def cadastrar():
 #Valida Cadastro
 @app.route('/validar/<acesso>', methods=['GET'])
 def validar_cadastro(acesso):
+    #Atualiza o usuario que tem a chave de acesso passada na url.
     sqlite_atualiza_usuario(acesso)
     return env.get_template('/autorizado.html').render()
 
@@ -240,11 +246,14 @@ def valida_recaptcha(recaptcha):
 
     return response['status']
 
+#Cria a Chave de acesso do usuario com email, senha e o recaptcha utilizando
+#o algoritmo ripemd160.
 def chave_acesso(email,senha,recaptcha):
     h = hashlib.new('ripemd160')
     h.update(email+recaptcha+senha)
     return h.hexdigest()
 
+#Cria a Senha criptografada com SALT
 def criptografa(senha):
     senha_cript = crypt.crypt(_SALT1+senha,"$6$")
     return senha_cript
